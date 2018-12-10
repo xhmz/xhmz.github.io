@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly. add plugin in pom.xml  12345678910111213141516171819&amp;lt;plugin&amp;gt;    &amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;    &amp;">
+<meta name="keywords" content="maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="use maven assembly to package specified files into jar">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/maven-assembly/index.html">
+<meta property="og:site_name" content="xhmz&#39;s blog">
+<meta property="og:description" content="如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly. add plugin in pom.xml  12345678910111213141516171819&amp;lt;plugin&amp;gt;    &amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;    &amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-10T09:56:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="use maven assembly to package specified files into jar">
+<meta name="twitter:description" content="如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly. add plugin in pom.xml  12345678910111213141516171819&amp;lt;plugin&amp;gt;    &amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;    &amp;">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>use maven assembly to package specified files into jar</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/xhmz">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/12/07/powermockany-md/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$("#i-next").toggle();" onmouseout="$("#i-next").toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$("#i-top").toggle();" onmouseout="$("#i-top").toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$("#i-share").toggle();" onmouseout="$("#i-share").toggle();" onclick="$("#share").toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/12/10/maven-assembly/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/12/10/maven-assembly/&text=use maven assembly to package specified files into jar"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/12/10/maven-assembly/&is_video=false&description=use maven assembly to package specified files into jar"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=use maven assembly to package specified files into jar&body=Check out this article: http://yoursite.com/2018/12/10/maven-assembly/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/12/10/maven-assembly/&name=use maven assembly to package specified files into jar&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何把maven项目的一些文件打包成jar包-提供给第三方使用-这里使用maven-assembly-参考配置assembly"><span class="toc-number">1.</span> <span class="toc-text">如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly.</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        use maven assembly to package specified files into jar
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <span itemprop="name">xhmz's blog</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-10T09:36:38.000Z" itemprop="datePublished">2018-12-10</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/maven/">maven</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="如何把maven项目的一些文件打包成jar包-提供给第三方使用-这里使用maven-assembly-参考配置assembly"><a href="#如何把maven项目的一些文件打包成jar包-提供给第三方使用-这里使用maven-assembly-参考配置assembly" class="headerlink" title="如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly."></a>如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置<a href="http://maven.apache.org/plugins-archives/maven-assembly-plugin-2.2.2/attached-mojo.html#skipAssembly" target="_blank" rel="noopener">assembly</a>.</h3><ul>
+<li>add plugin in pom.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.4&lt;/version&gt;</span><br><span class="line">    &lt;configuration&gt;</span><br><span class="line">        &lt;skipAssembly&gt;$&#123;skipAssembly&#125;&lt;/skipAssembly&gt;</span><br><span class="line">        &lt;descriptors&gt;</span><br><span class="line">            &lt;descriptor&gt;src/main/assembly/assembly.xml&lt;/descriptor&gt;</span><br><span class="line">        &lt;/descriptors&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;id&gt;make-assembly&lt;/id&gt;</span><br><span class="line">            &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;single&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意一点, 要指定assembly.xml</strong></p>
+<ul>
+<li>add 要指定assembly.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;assembly&gt;</span><br><span class="line">    &lt;id&gt;&#123;id&#125;&lt;/id&gt;</span><br><span class="line">    &lt;formats&gt;</span><br><span class="line">        &lt;format&gt;jar&lt;/format&gt;</span><br><span class="line">    &lt;/formats&gt;</span><br><span class="line">    &lt;includeBaseDirectory&gt;false&lt;/includeBaseDirectory&gt;</span><br><span class="line">    &lt;dependencySets&gt;</span><br><span class="line">        &lt;dependencySet&gt;</span><br><span class="line">            &lt;outputDirectory&gt;lib&lt;/outputDirectory&gt;</span><br><span class="line">            &lt;scope&gt;unknown&lt;/scope&gt;</span><br><span class="line">            &lt;excludes&gt;</span><br><span class="line">                &lt;exclude&gt;$&#123;groupId&#125;:$&#123;artifactId&#125;&lt;/exclude&gt;</span><br><span class="line">            &lt;/excludes&gt;</span><br><span class="line">        &lt;/dependencySet&gt;</span><br><span class="line">    &lt;/dependencySets&gt;</span><br><span class="line">    &lt;fileSets&gt;</span><br><span class="line">        &lt;fileSet&gt;</span><br><span class="line">            &lt;outputDirectory&gt;/&lt;/outputDirectory&gt;</span><br><span class="line">            &lt;directory&gt;$&#123;project.build.outputDirectory&#125;&lt;/directory&gt;</span><br><span class="line">            &lt;includes&gt;</span><br><span class="line">                &lt;include&gt;a/b/**&lt;/include&gt;</span><br><span class="line">                &lt;include&gt;a/c/**&lt;/include&gt;</span><br><span class="line">                &lt;include&gt;a/cc.class&lt;/include&gt;</span><br><span class="line">            &lt;/includes&gt;</span><br><span class="line">        &lt;/fileSet&gt;</span><br><span class="line">    &lt;/fileSets&gt;</span><br><span class="line">&lt;/assembly&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dependencySets, dependencySet: 设置需要依赖的包   </span><br><span class="line">outputDirectory: 打包以后依赖jar的目录   </span><br><span class="line">scope: 需要打包的依赖的scope,因为我这里不需要任何依赖,所以使用了一个不存在的.如果你要打包runtime的,就写&lt;scope&gt;runtime&lt;/scope&gt;   </span><br><span class="line">excludes: 要排除哪些包,格式是 $&#123;groupId&#125;:$&#123;artifactId&#125;  </span><br><span class="line"></span><br><span class="line">fileSets, fileSet: 设置需要打包的文件    </span><br><span class="line">outputDirectory: 打包以后文件的目录, 一般在根目录    </span><br><span class="line">directory: classes目录, 一般使用$&#123;project.build.outputDirectory&#125;    </span><br><span class="line">includes: 要打包哪些文件,如果是目录,使用 a/b/** ,如果是文件, 就用 a/cc.class</span><br></pre></td></tr></table></figure>
+<ul>
+<li>打包</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -DskipAssembly=false -Dmaven.test.skip=true package</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/xhmz">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何把maven项目的一些文件打包成jar包-提供给第三方使用-这里使用maven-assembly-参考配置assembly"><span class="toc-number">1.</span> <span class="toc-text">如何把maven项目的一些文件打包成jar包, 提供给第三方使用,这里使用maven assembly, 参考配置assembly.</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/12/10/maven-assembly/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/12/10/maven-assembly/&text=use maven assembly to package specified files into jar"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/12/10/maven-assembly/&is_video=false&description=use maven assembly to package specified files into jar"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=use maven assembly to package specified files into jar&body=Check out this article: http://yoursite.com/2018/12/10/maven-assembly/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/12/10/maven-assembly/&title=use maven assembly to package specified files into jar"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/12/10/maven-assembly/&name=use maven assembly to package specified files into jar&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$("#toc-footer").toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$("#share-footer").toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$("#nav-footer").toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 xhmz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/xhmz">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
