@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="shell 分割字符串的方法 echo “a/b/c” | cut -f 2 -d “/“  -&amp;gt; [b], 其中2就是下标, “/“ 就是分隔符 echo “a/b/c” | awk -F “/“ ‘{print $NF}’ -&amp;gt; [c], 其中 -F 是分隔符, $NF 取最后一个元素 echo “a/b/c” | awk -F “/“ ‘{print $1}’ -&amp;gt; [a]">
+    <meta name="description" content="shell删除最后一个字符  1sed -i &amp;apos;$s/.$//&amp;apos; $finalFile  统计字符串 单词出现次数  1echo $data | awk  &amp;apos;&amp;#123;s+=gsub(/$word/,&amp;quot;&amp;amp;&amp;quot;)&amp;#125;END&amp;#123;print s&amp;#125;&amp;apos;  sed 替换文件内容  1sed -i &amp;quot;s@b">
 <meta name="keywords" content="shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell">
 <meta property="og:url" content="http://yoursite.com/2019/01/15/shell/index.html">
 <meta property="og:site_name" content="xhmz&#39;s blog">
-<meta property="og:description" content="shell 分割字符串的方法 echo “a/b/c” | cut -f 2 -d “/“  -&amp;gt; [b], 其中2就是下标, “/“ 就是分隔符 echo “a/b/c” | awk -F “/“ ‘{print $NF}’ -&amp;gt; [c], 其中 -F 是分隔符, $NF 取最后一个元素 echo “a/b/c” | awk -F “/“ ‘{print $1}’ -&amp;gt; [a]">
+<meta property="og:description" content="shell删除最后一个字符  1sed -i &amp;apos;$s/.$//&amp;apos; $finalFile  统计字符串 单词出现次数  1echo $data | awk  &amp;apos;&amp;#123;s+=gsub(/$word/,&amp;quot;&amp;amp;&amp;quot;)&amp;#125;END&amp;#123;print s&amp;#125;&amp;apos;  sed 替换文件内容  1sed -i &amp;quot;s@b">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-15T07:10:54.000Z">
+<meta property="og:updated_time" content="2019-07-25T04:06:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell">
-<meta name="twitter:description" content="shell 分割字符串的方法 echo “a/b/c” | cut -f 2 -d “/“  -&amp;gt; [b], 其中2就是下标, “/“ 就是分隔符 echo “a/b/c” | awk -F “/“ ‘{print $NF}’ -&amp;gt; [c], 其中 -F 是分隔符, $NF 取最后一个元素 echo “a/b/c” | awk -F “/“ ‘{print $1}’ -&amp;gt; [a]">
+<meta name="twitter:description" content="shell删除最后一个字符  1sed -i &amp;apos;$s/.$//&amp;apos; $finalFile  统计字符串 单词出现次数  1echo $data | awk  &amp;apos;&amp;#123;s+=gsub(/$word/,&amp;quot;&amp;amp;&amp;quot;)&amp;#125;END&amp;#123;print s&amp;#125;&amp;apos;  sed 替换文件内容  1sed -i &amp;quot;s@b">
     
     
         
@@ -95,7 +95,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-分割字符串的方法"><span class="toc-number">1.</span> <span class="toc-text">shell 分割字符串的方法</span></a></li></ol>
+      
     </div>
   </span>
 </div>
@@ -134,12 +134,50 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="shell-分割字符串的方法"><a href="#shell-分割字符串的方法" class="headerlink" title="shell 分割字符串的方法"></a>shell 分割字符串的方法</h2><ol>
-<li>echo “a/b/c” | cut -f 2 -d “/“  -&gt; [b], 其中2就是下标, “/“ 就是分隔符</li>
-<li>echo “a/b/c” | awk -F “/“ ‘{print $NF}’ -&gt; [c], 其中 -F 是分隔符, $NF 取最后一个元素</li>
-<li>echo “a/b/c” | awk -F “/“ ‘{print $1}’ -&gt; [a], 其中 -F 是分隔符, $1 取下标元素</li>
+    <ol>
+<li><p>shell删除最后一个字符</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &apos;$s/.$//&apos; $finalFile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计字符串 单词出现次数</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $data | awk  &apos;&#123;s+=gsub(/$word/,&quot;&amp;&quot;)&#125;END&#123;print s&#125;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sed 替换文件内容</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s@before$after$g&quot; $file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sed 替换文件内容并生成新的文件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -e &quot;s@before@after@g&quot; \</span><br><span class="line">    -e &quot;s@before@after@g&quot; $file &gt;&gt; $newFile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell for 循环</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for((i=0;i&lt;10;i++))</span><br><span class="line">do</span><br><span class="line">    //TODO</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell 判断</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[ $a -eq $b ]];then</span><br><span class="line">    //TODO</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell 读取文件内容</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while read line; do</span><br><span class="line">    if [[ &quot;$line&quot; == &quot;&quot; ]]; then</span><br><span class="line">      continue</span><br><span class="line">    fi</span><br><span class="line">done &lt; $file</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数字运算</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let a=b+1</span><br><span class="line">let a=b/2</span><br><span class="line">let a=c-1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数字比较</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a -eq b 等于</span><br><span class="line">a -nq b 不等于</span><br><span class="line">a -lt b 小于</span><br><span class="line">a -gt b 大于</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell 解析 json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">json=&#123;</span><br><span class="line">    &quot;status&quot;:1,</span><br><span class="line">    &quot;list&quot;:[</span><br><span class="line">        &#123;&quot;a&quot;:1&#125;,</span><br><span class="line">        &#123;&quot;b&quot;:2&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">status=`echo $json | jq .status`</span><br><span class="line">a=`echo $json | jq .list[0].a`</span><br><span class="line">b=`echo $json | jq .list[1].b`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell echo 文件颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NC=&apos;\033[0m&apos; # No Color</span><br><span class="line">RED=&apos;\033[0;31m&apos;</span><br><span class="line">GREEN=&apos;\033[0;32m&apos;</span><br><span class="line">YELLOW=&apos;\033[0;33m&apos;</span><br><span class="line">BLUE=&apos;\033[0;34m&apos;</span><br><span class="line"></span><br><span class="line">echo -e &quot;$&#123;RED&#125;red$&#123;NC&#125;&quot;</span><br><span class="line">echo -e &quot;$&#123;BLUE&#125;blue&#123;NC&#125;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list[0]=1</span><br><span class="line">list[2]=2</span><br><span class="line">length=$&#123;#list[*]&#125;</span><br><span class="line">content=$&#123;list[*]&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>curl 一些参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --retry 3 --retry-delay 2 --retry-max-time 10 -H &apos;Accept: application/json&apos; -H &apos;Content-Type: application/json&apos; -X POST -d @$finalFile http://ip:host</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell 分割字符串的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. echo &quot;a/b/c&quot; | cut -f 2 -d &quot;/&quot;  -&gt; [b], 其中2就是下标, &quot;/&quot; 就是分隔符</span><br><span class="line">2. echo &quot;a/b/c&quot; | awk -F &quot;/&quot; &apos;&#123;print $NF&#125;&apos; -&gt; [c], 其中 -F 是分隔符, $NF 取最后一个元素</span><br><span class="line">3. echo &quot;a/b/c&quot; | awk -F &quot;/&quot; &apos;&#123;print $1&#125;&apos; -&gt; [a], 其中 -F 是分隔符, $1 取下标元素</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>## </p>
 
   </div>
 </article>
@@ -162,7 +200,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-分割字符串的方法"><span class="toc-number">1.</span> <span class="toc-text">shell 分割字符串的方法</span></a></li></ol>
+      
     </div>
 
     <div id="share-footer" style="display: none">
