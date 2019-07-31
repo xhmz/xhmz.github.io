@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="xhmz&#39;s blog">
 <meta property="og:description" content="shell删除最后一个字符  1sed -i &amp;apos;$s/.$//&amp;apos; $finalFile  统计字符串 单词出现次数  1echo $data | awk  &amp;apos;&amp;#123;s+=gsub(/$word/,&amp;quot;&amp;amp;&amp;quot;)&amp;#125;END&amp;#123;print s&amp;#125;&amp;apos;  sed 替换文件内容  1sed -i &amp;quot;s@b">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-25T09:28:40.000Z">
+<meta property="og:updated_time" content="2019-07-31T02:04:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell">
 <meta name="twitter:description" content="shell删除最后一个字符  1sed -i &amp;apos;$s/.$//&amp;apos; $finalFile  统计字符串 单词出现次数  1echo $data | awk  &amp;apos;&amp;#123;s+=gsub(/$word/,&amp;quot;&amp;amp;&amp;quot;)&amp;#125;END&amp;#123;print s&amp;#125;&amp;apos;  sed 替换文件内容  1sed -i &amp;quot;s@b">
@@ -179,6 +179,12 @@
 </li>
 <li><p>反转文件内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tac $file1 &gt; $file2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计所有agent节点的mem使用情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible agent -m shell -a &apos;free -m &apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>shell 时间字符串和时间戳相互转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">date +%s   可以得到UNIX的时间戳</span><br><span class="line">date -d &quot;2010-10-18 00:00:00&quot; +%s  输出: 1287360000</span><br><span class="line">date -d @1287331200  &quot;+%Y-%m-%d&quot;   输出: 2010-10-17 </span><br><span class="line">如果需要得到指定日期的前后几天</span><br><span class="line">  1. seconds=`date -d &quot;2010-10-18 00:00:00&quot; +%s`       #得到时间戳</span><br><span class="line">  2. seconds_new=`expr $seconds + 86400`               #加上一天的秒数86400  </span><br><span class="line">  3. date_new=`date -d @$seconds_new &quot;+%Y-%m-%d %H:%M:%S&quot;`      #获得指定日前加上一天</span><br><span class="line">通过date --help 查看format</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
